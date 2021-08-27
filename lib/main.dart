@@ -11,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logging/logging.dart';
+import 'package:notes_app/Bible/entrance.dart';
 import 'package:notes_app/authentication/services/auth.dart';
 import 'package:notes_app/authentication/splash.dart';
 import 'package:notes_app/internal/constants.dart';
@@ -25,7 +26,12 @@ import 'package:notes_app/providers/notifierProvider.dart';
 import 'package:notes_app/providers/selectedItemProvider.dart';
 import 'package:notes_app/providers/selectedUserProvider.dart';
 import 'package:notes_app/providers/widgetScreenProvider.dart';
+import 'package:notes_app/screens/admin/admin_screen.dart';
+import 'package:notes_app/screens/admin/prayers/prayer_screen.dart';
 import 'package:notes_app/screens/home.dart';
+import 'package:notes_app/screens/home/edit_profile_screen.dart';
+import 'package:notes_app/screens/home/hog_screen.dart';
+import 'package:notes_app/screens/profile/profile_screen.dart';
 import 'package:notes_app/size_config.dart';
 import 'package:notes_app/ui/internal/navigationService.dart';
 import 'package:notes_app/ui/internal/scrollBehavior.dart';
@@ -211,6 +217,14 @@ class _MyAppState extends State<MyApp> {
             routes: {
               'main': (context) => Material(child: SplashScreen()),
               'intro': (context) => IntroScreen(),
+              HOGHome.routeName: (context) => HOGHome(),
+              Entrance.routeName: (context) => Entrance(),
+              //CompleteProfileScreen.routeName: (context) => CompleteProfileScreen(),
+              ProfileScreen.routeName: (context) => ProfileScreen(),
+              EditProfileScreen.routeName: (context) => EditProfileScreen(),
+              AdminScreen.routeName: (context) => AdminScreen(),
+              PrayerScreen.routeName: (context) => PrayerScreen(),
+              ProfileScreen.routeName: (context) => ProfileScreen(),
             },
           ),
         );

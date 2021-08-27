@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
-import 'package:notes_app/screens/home.dart';
 import 'package:notes_app/screens/home/hog_screen.dart';
 import 'package:notes_app/utils/log.dart';
 import 'package:provider/provider.dart';
