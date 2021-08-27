@@ -19,7 +19,7 @@ Future main() async{
 
   await UserPrefrences.init();
 
-  Logger.root.onRecord.listen((record) {
+  /* Logger.root.onRecord.listen((record) {
     debugPrint('${record.level.name}: ${record.time}: ${record.message}');
     if (record.error != null) {
       debugPrint('${record.error}');
@@ -27,7 +27,7 @@ Future main() async{
     if (record.stackTrace != null) {
       debugPrint('${record.stackTrace}');
     }
-  });
+  }); */
 
   await Firebase.initializeApp();
 

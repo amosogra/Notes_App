@@ -2,6 +2,7 @@
 import 'dart:async';
 
 // Flutter
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // Packages
@@ -25,16 +26,20 @@ class LegacyPreferences {
 
   Future<void> initPreferences() async {
     prefs = await SharedPreferences.getInstance();
-    if (Platform.isAndroid) {
-      AndroidDeviceInfo deviceInfo = await DeviceInfoPlugin().androidInfo;
-      sdkInt = deviceInfo.version.sdkInt;
-      if (sdkInt >= 28) {
-        isSystemThemeAvailable = true;
-      } else {
-        isSystemThemeAvailable = false;
-      }
+    if (kIsWeb) {
+      isSystemThemeAvailable = false;
     } else {
-      isSystemThemeAvailable = true;
+      if (Platform.isAndroid) {
+        AndroidDeviceInfo deviceInfo = await DeviceInfoPlugin().androidInfo;
+        sdkInt = deviceInfo.version.sdkInt;
+        if (sdkInt >= 28) {
+          isSystemThemeAvailable = true;
+        } else {
+          isSystemThemeAvailable = false;
+        }
+      } else {
+        isSystemThemeAvailable = true;
+      }
     }
   }
 
