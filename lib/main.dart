@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/authentication/splash.dart';
 import 'package:notes_app/screens/home.dart';
 import 'models/user_prefrences.dart';
 
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color.fromARGB(255, 37, 37, 37),
         primarySwatch: Colors.blue,
       ),
-      home: Home(),
+      home: Material(child: SplashScreen()),
     );
   }
 }
