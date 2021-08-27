@@ -137,7 +137,7 @@ class _MyAppState extends State<MyApp> {
               scaffoldBackgroundColor: const Color.fromARGB(255, 37, 37, 37),
               primarySwatch: Colors.blue,
             ),
-            home: Material(child: SplashScreen()),
+            home: Home()//Material(child: SplashScreen()),
           );
         }
       ),
