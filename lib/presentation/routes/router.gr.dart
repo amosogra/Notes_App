@@ -5,6 +5,7 @@
 // **************************************************************************
 
 import 'package:auto_route/auto_route.dart' as _i1;
+import 'package:flutter/foundation.dart' as _i5;
 import 'package:flutter/material.dart' as _i2;
 
 import '../../Bible/entrance.dart' as _i4;
@@ -24,7 +25,7 @@ class AppRouter extends _i1.RootStackRouter {
         routeData: routeData,
         builder: (data) {
           final args = data.argsAs<EntranceRouteArgs>(orElse: () => const EntranceRouteArgs());
-          return _i4.Entrance(key: args.key, initialRoute: args.initialRoute, isTesting: args.isTesting);
+          return _i4.Entrance(key: args.key, initialRoute: args.initialRoute, isTesting: args.isTesting ?? false);
         })
   };
 
@@ -39,18 +40,18 @@ class HomePageRoute extends _i1.PageRouteInfo {
 }
 
 class EntranceRoute extends _i1.PageRouteInfo<EntranceRouteArgs> {
-  EntranceRoute({_i2.Key? key, String? initialRoute, bool? isTesting})
-      : super(name, path: '/Entrance', args: EntranceRouteArgs(key: key, initialRoute: initialRoute, isTesting: isTesting ?? false));
+  EntranceRoute({_i5.Key? key, String? initialRoute, bool? isTesting})
+      : super(name, path: '/Entrance', args: EntranceRouteArgs(key: key, initialRoute: initialRoute, isTesting: isTesting));
 
   static const String name = 'EntranceRoute';
 }
 
 class EntranceRouteArgs {
-  const EntranceRouteArgs({this.key, this.initialRoute, this.isTesting = false});
+  const EntranceRouteArgs({this.key, this.initialRoute, this.isTesting});
 
-  final _i2.Key? key;
+  final _i5.Key? key;
 
   final String? initialRoute;
 
-  final bool isTesting;
+  final bool? isTesting;
 }
