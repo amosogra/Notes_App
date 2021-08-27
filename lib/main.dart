@@ -204,8 +204,8 @@ class _MyAppState extends State<MyApp> {
               },
             ),
             navigatorKey: NavigationService.instance.navigationKey,
-            //initialRoute: config!.preferences.showIntroductionPages() && !kIsWeb ? 'intro' : 'main',
-            home: Material(child: SplashScreen()),
+            initialRoute: config.preferences.showIntroductionPages() && !kIsWeb ? 'intro' : 'main',
+            //home: Material(child: SplashScreen()),
             routes: {
               'main': (context) => Material(child: SplashScreen()),
               'intro': (context) => IntroScreen(),
