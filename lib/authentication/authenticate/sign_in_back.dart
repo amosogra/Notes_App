@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:notes_app/authentication/services/auth.dart';
 import 'package:notes_app/internal/constants.dart';
+import 'package:notes_app/kconstants.dart';
 import 'package:notes_app/providers/configurationProvider.dart';
 import 'package:notes_app/utils/loading.dart';
 import 'package:notes_app/utils/log.dart';
@@ -40,9 +41,9 @@ class _SignInState extends State<SignIn> {
         ? Loading()
         : Scaffold(
             resizeToAvoidBottomInset: true,
-            //backgroundColor: config.darkThemeEnabled ? bgColorD : Colors.white,
+            backgroundColor: config.darkThemeEnabled ? bgColorD : Colors.white,
             appBar: AppBar(
-              //backgroundColor: config.darkThemeEnabled ? bgColorD : Colors.white,
+              backgroundColor: config.darkThemeEnabled ? bgColorD.withOpacity(0.2) : Colors.white,
               elevation: 0.0,
               leading: InkWell(
                   onTap: () {
@@ -100,11 +101,12 @@ class _SignInState extends State<SignIn> {
                   child: ListView(
                     children: <Widget>[
                       Container(
-                          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-                          child: Text(
-                            "Sign In",
-                            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                          )),
+                        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+                        child: Text(
+                          "Sign In",
+                          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: config.darkThemeEnabled ? Colors.white : null),
+                        ),
+                      ),
                       SizedBox(
                         height: 20,
                       ),
@@ -129,7 +131,7 @@ class _SignInState extends State<SignIn> {
                           textAlign: TextAlign.start,
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: config.darkThemeEnabled ? Theme.of(context).colorScheme.background.withOpacity(0.015) : Color.fromRGBO(234, 234, 234, 1),
+                            fillColor: Color.fromRGBO(234, 234, 234, 1),
                             hintText: 'Email',
                             contentPadding: EdgeInsets.all(Responsive.isMobile(context)
                                 ? 12
@@ -165,7 +167,7 @@ class _SignInState extends State<SignIn> {
                           textAlign: TextAlign.start,
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: config.darkThemeEnabled ? Theme.of(context).colorScheme.background.withOpacity(0.015) : Color.fromRGBO(234, 234, 234, 1),
+                            fillColor: Color.fromRGBO(234, 234, 234, 1),
                             hintText: 'Password',
                             contentPadding: EdgeInsets.all(Responsive.isMobile(context)
                                 ? 12

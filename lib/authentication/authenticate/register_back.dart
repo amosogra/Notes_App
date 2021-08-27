@@ -103,9 +103,9 @@ class _RegisterState extends State<Register> {
         ? Loading()
         : Scaffold(
             resizeToAvoidBottomInset: true,
-            //backgroundColor: config.darkThemeEnabled ? bgColorD : Colors.white,
+            backgroundColor: config.darkThemeEnabled ? bgColorD : Colors.white,
             appBar: AppBar(
-              //backgroundColor: backgroundColor: config.darkThemeEnabled ? bgColorD : Colors.white,
+              backgroundColor: config.darkThemeEnabled ? bgColorD.withOpacity(0.2) : Colors.white,
               elevation: 0.0,
               leading: Container(),
               actions: <Widget>[
@@ -129,10 +129,11 @@ class _RegisterState extends State<Register> {
                     child: ListView(
                       children: <Widget>[
                         Container(
-                            child: Text(
-                          "Sign Up".toUpperCase(),
-                          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                        )),
+                          child: Text(
+                            "Sign Up".toUpperCase(),
+                            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: config.darkThemeEnabled ? Colors.white : null),
+                          ),
+                        ),
                         SizedBox(
                           height: 20,
                         ),
@@ -174,7 +175,7 @@ class _RegisterState extends State<Register> {
                           textAlign: TextAlign.start,
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: config.darkThemeEnabled ? Theme.of(context).colorScheme.background.withOpacity(0.015) : Color.fromRGBO(234, 234, 234, 1),
+                            fillColor: Color.fromRGBO(234, 234, 234, 1),
                             hintText: 'Email',
                             contentPadding: EdgeInsets.all(Responsive.isMobile(context)
                                 ? 12
@@ -213,7 +214,7 @@ class _RegisterState extends State<Register> {
                           textAlign: TextAlign.start,
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: config.darkThemeEnabled ? Theme.of(context).colorScheme.background.withOpacity(0.015) : Color.fromRGBO(234, 234, 234, 1),
+                            fillColor: Color.fromRGBO(234, 234, 234, 1),
                             hintText: 'Password',
                             contentPadding: EdgeInsets.all(Responsive.isMobile(context)
                                 ? 12
