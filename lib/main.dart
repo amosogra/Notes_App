@@ -6,6 +6,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logging/logging.dart';
@@ -140,9 +141,29 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider<NotifierProvider>(create: (context) => NotifierProvider()),
       ],
       child: Builder(builder: (context) {
+
+         List<Locale> supportedLocales = [];
+        supportedLanguages.forEach((element) => supportedLocales.add(Locale(element.languageCode, '')));
         return OverlaySupport.global(
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
+            locale: _locale,
+            supportedLocales: supportedLocales,
+            localizationsDelegates: [
+              FallbackLocalizationDelegate(),
+              AppLocalizationsDelegate(),
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            localeResolutionCallback: (locale, supportedLocales) {
+              for (var supportedLocale in supportedLocales) {
+                if (supportedLocale.languageCode == locale?.languageCode && supportedLocale.countryCode == locale?.countryCode) {
+                  return supportedLocale;
+                }
+              }
+              return supportedLocales.first;
+            },
             theme: ThemeData(
               scaffoldBackgroundColor: const Color.fromARGB(255, 37, 37, 37),
               primarySwatch: Colors.blue,
