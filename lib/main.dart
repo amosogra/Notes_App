@@ -13,6 +13,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logging/logging.dart';
 import 'package:notes_app/authentication/services/auth.dart';
 import 'package:notes_app/authentication/splash.dart';
+import 'package:notes_app/internal/constants.dart';
 import 'package:notes_app/internal/languages.dart';
 import 'package:notes_app/internal/legacyPreferences.dart';
 import 'package:notes_app/intro/introduction.dart';
@@ -174,6 +175,7 @@ class _MyAppState extends State<MyApp> {
         return OverlaySupport.global(
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
+            title: Constants.appName,
             locale: _locale,
             supportedLocales: supportedLocales,
             localizationsDelegates: [
@@ -204,8 +206,8 @@ class _MyAppState extends State<MyApp> {
               },
             ),
             navigatorKey: NavigationService.instance.navigationKey,
-            initialRoute: config.preferences.showIntroductionPages() && !kIsWeb ? 'intro' : 'main',
-            //home: Material(child: SplashScreen()),
+            //initialRoute: config.preferences.showIntroductionPages() && !kIsWeb ? 'intro' : 'main',
+            home: Material(child: SplashScreen()),
             routes: {
               'main': (context) => Material(child: SplashScreen()),
               'intro': (context) => IntroScreen(),
