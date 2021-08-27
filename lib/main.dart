@@ -21,24 +21,27 @@ import 'package:notes_app/providers/selectedUserProvider.dart';
 import 'package:notes_app/providers/widgetScreenProvider.dart';
 import 'package:notes_app/screens/home.dart';
 import 'package:notes_app/utils/log.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'models/user_prefrences.dart';
 import 'providers/configurationProvider.dart';
 
-Future main() async{
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await UserPrefrences.init();
 
-  Logger.root.onRecord.listen((record) {
-    debugPrint('${record.level.name}: ${record.time}: ${record.message}');
-    if (record.error != null) {
-      debugPrint('${record.error}');
-    }
-    if (record.stackTrace != null) {
-      debugPrint('${record.stackTrace}');
-    }
-  });
+  if (!kIsWeb) {
+    Logger.root.onRecord.listen((record) {
+      log('${record.level.name}: ${record.time}: ${record.message}');
+      if (record.error != null) {
+        log('${record.error}');
+      }
+      if (record.stackTrace != null) {
+        log('${record.stackTrace}');
+      }
+    });
+  }
 
   await Firebase.initializeApp();
 
@@ -77,7 +80,6 @@ class MyApp extends StatefulWidget {
     var state = context.findAncestorStateOfType<_MyAppState>()!;
     state.validateTheme();
   }
-
 
   final LegacyPreferences preloadedFs;
   const MyApp({Key? key, required this.preloadedFs}) : super(key: key);
@@ -132,16 +134,17 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider<NotifierProvider>(create: (context) => NotifierProvider()),
       ],
       child: Builder(builder: (context) {
-          return MaterialApp(
+        return OverlaySupport.global(
+          child: MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               scaffoldBackgroundColor: const Color.fromARGB(255, 37, 37, 37),
               primarySwatch: Colors.blue,
             ),
             home: Material(child: SplashScreen()),
-          );
-        }
-      ),
+          ),
+        );
+      }),
     );
   }
 }
