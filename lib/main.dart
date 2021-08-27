@@ -1,16 +1,26 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logging/logging.dart';
+import 'package:notes_app/authentication/services/auth.dart';
 import 'package:notes_app/authentication/splash.dart';
 import 'package:notes_app/internal/languages.dart';
 import 'package:notes_app/internal/legacyPreferences.dart';
+import 'package:notes_app/providers/bodyTypeWidgetProvider.dart';
+import 'package:notes_app/providers/bodyUpdateProvider.dart';
+import 'package:notes_app/providers/detailsBodyWidgetProvider.dart';
+import 'package:notes_app/providers/notifierProvider.dart';
+import 'package:notes_app/providers/selectedItemProvider.dart';
+import 'package:notes_app/providers/selectedUserProvider.dart';
+import 'package:notes_app/providers/widgetScreenProvider.dart';
 import 'package:notes_app/screens/home.dart';
 import 'package:notes_app/utils/log.dart';
+import 'package:provider/provider.dart';
 import 'models/user_prefrences.dart';
 import 'providers/configurationProvider.dart';
 
@@ -108,13 +118,29 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: const Color.fromARGB(255, 37, 37, 37),
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: [
+        StreamProvider<User?>.value(value: AuthService().stream, initialData: null),
+        ChangeNotifierProvider<ConfigurationProvider>(create: (context) => ConfigurationProvider(preferences: widget.preloadedFs)),
+        ChangeNotifierProvider<WidgetScreenProvider>(create: (context) => WidgetScreenProvider()),
+        ChangeNotifierProvider<BodyUpdateProvider>(create: (context) => BodyUpdateProvider()),
+        ChangeNotifierProvider<SelectedItemProvider>(create: (context) => SelectedItemProvider()),
+        ChangeNotifierProvider<SelectedUserProvider>(create: (context) => SelectedUserProvider()),
+        ChangeNotifierProvider<BodyTypeWidgetProvider>(create: (context) => BodyTypeWidgetProvider()),
+        ChangeNotifierProvider<DetailsBodyWidgetProvider>(create: (context) => DetailsBodyWidgetProvider()),
+        ChangeNotifierProvider<NotifierProvider>(create: (context) => NotifierProvider()),
+      ],
+      child: Builder(builder: (context) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              scaffoldBackgroundColor: const Color.fromARGB(255, 37, 37, 37),
+              primarySwatch: Colors.blue,
+            ),
+            home: Material(child: SplashScreen()),
+          );
+        }
       ),
-      home: Material(child: SplashScreen()),
     );
   }
 }
