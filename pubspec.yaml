@@ -77,6 +77,12 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  assets:
+    - assets/book.json
+    - assets/Icons/
+    - assets/images/
+    - assets/LICENSE
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -99,6 +105,40 @@ flutter:
       fonts:
         - asset: fonts/GresaRegular.ttf
           style: italic
+    - family: YTSans
+      fonts:
+        - asset: assets/fonts/youtube-sans-medium.ttf
+          weight: 500
+        - asset: assets/fonts/youtube-sans-light.ttf
+          weight: 300
+        - asset: assets/fonts/youtube-sans-bold.ttf
+          weight: 700
+    - family: Product Sans
+      fonts:
+        - asset: assets/fonts/productSans/bold.ttf
+          weight: 700
+        - asset: assets/fonts/productSans/regular.ttf
+          weight: 400
+    - family: Muli
+      fonts:
+        - asset: assets/fonts/muli/Muli.ttf
+        - asset: assets/fonts/muli/Muli-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/muli/Muli-Light.ttf
+          weight: 300
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato-Thin.ttf
+        - asset: assets/fonts/Lato-Regular.ttf
+        - asset: assets/fonts/Lato-Light.ttf
+        - asset: assets/fonts/Lato-Italic.ttf
+        - asset: assets/fonts/Lato-Bold.ttf
+    - family: LaiSiangtho
+      fonts:
+        - asset: assets/fonts/LaiSiangtho.ttf
+    - family: Mm3Web
+      fonts:
+        - asset: assets/fonts/Mm3Web.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

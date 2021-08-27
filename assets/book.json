@@ -1,0 +1,59 @@
+{
+  "name": "Lai Siangtho",
+  "updated": "2019-01-18T17:45:28.365Z",
+  "version": 1,
+  "bookmark": [],
+  "keyword": [
+    "God is good",
+    "good and evil",
+    "Jesus is the Christ",
+    "bawngnawi leh khuaizu"
+  ],
+  "book": [
+    {
+      "identify": "kjv1611",
+      "name": "King James Version",
+      "shortname": "KJV",
+      "year": "1611",
+      "language": {
+        "text": "English",
+        "textdirection": "ltr",
+        "name": "en"
+      },
+      "version": 1,
+      "description": "In 1604, King James I of England authorized that a new translation of the Bible into English be started. It was finished in 1611, just 85 years after the first translation of the New Testament into English appeared (Tyndale, 1526). The Authorized Version, or King James Version, quickly became the standard for English-speaking Protestants. Its flowing language and prose rhythm has had a profound influence on the literature of the past 300 years.",
+      "publisher": "Crown Copyright in UK",
+      "contributors": "",
+      "copyright": "Crown Copyright in UK"
+    },
+    {
+      "identify": "niv2011",
+      "name": "New International Version",
+      "shortname": "NIV",
+      "year": "2011",
+      "language": {
+        "text": "English",
+        "textdirection": "ltr",
+        "name": "en"
+      },
+      "version": "1"
+    }
+  ],
+  "collection": {
+    "xml": [],
+    "json": [],
+    "sqlite": [],
+    "wbc": [],
+    "koh": [],
+    "ph4": []
+  },
+  "language": {},
+  "settting": {
+    "identify": "",
+    "bookId": 1,
+    "chapterId": 1,
+    "verseId": 1,
+    "fontSize": 16.0,
+    "searchQuery": ""
+  }
+}
