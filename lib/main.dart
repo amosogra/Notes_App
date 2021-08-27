@@ -147,7 +147,7 @@ class _MyAppState extends State<MyApp> {
               scaffoldBackgroundColor: const Color.fromARGB(255, 37, 37, 37),
               primarySwatch: Colors.blue,
             ),
-            /* builder: EasyLoading.init(
+            builder: EasyLoading.init(
               builder: (context, child) {
                 SizeConfig().init(context);
                 MySize().init(context);
@@ -156,7 +156,7 @@ class _MyAppState extends State<MyApp> {
                   child: child!,
                 );
               },
-            ), */
+            ),
             navigatorKey: NavigationService.instance.navigationKey,
             //initialRoute: config!.preferences.showIntroductionPages() && !kIsWeb ? 'intro' : 'main',
             home: Material(child: SplashScreen()),
