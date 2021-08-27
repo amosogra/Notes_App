@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logging/logging.dart';
@@ -15,6 +16,7 @@ import 'package:notes_app/authentication/splash.dart';
 import 'package:notes_app/internal/languages.dart';
 import 'package:notes_app/internal/legacyPreferences.dart';
 import 'package:notes_app/intro/introduction.dart';
+import 'package:notes_app/kconstants.dart';
 import 'package:notes_app/providers/bodyTypeWidgetProvider.dart';
 import 'package:notes_app/providers/bodyUpdateProvider.dart';
 import 'package:notes_app/providers/detailsBodyWidgetProvider.dart';
@@ -26,6 +28,7 @@ import 'package:notes_app/screens/home.dart';
 import 'package:notes_app/size_config.dart';
 import 'package:notes_app/ui/internal/navigationService.dart';
 import 'package:notes_app/ui/internal/scrollBehavior.dart';
+import 'package:notes_app/ui/internal/themeValues.dart';
 import 'package:notes_app/utils/SizeConfig.dart';
 import 'package:notes_app/utils/log.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -99,7 +102,7 @@ class _MyAppState extends State<MyApp> {
   // Language
   Locale? _locale;
 
-  ConfigurationProvider? config;
+  ConfigurationProvider? configx;
   void setLocale(Locale locale) {
     setState(() {
       _locale = locale;
@@ -109,7 +112,7 @@ class _MyAppState extends State<MyApp> {
   void validateTheme() {
     log("OOOHHHHHAY");
     try {
-      config?.darkThemeEnabled = config?.darkThemeEnabled as bool;
+      configx?.darkThemeEnabled = configx?.darkThemeEnabled as bool;
     } catch (e) {
       log("THIS IS NOT GOOD!");
       log("LOG: $e");
@@ -141,8 +144,32 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider<NotifierProvider>(create: (context) => NotifierProvider()),
       ],
       child: Builder(builder: (context) {
+        final config = Provider.of<ConfigurationProvider>(context);
+        configx = config;
+        ThemeData customTheme;
+        ThemeData darkTheme;
 
-         List<Locale> supportedLocales = [];
+        darkTheme = config.blackThemeEnabled
+            ? AppTheme.black(config.accentColor).copyWith(
+                scaffoldBackgroundColor: bgColorD, //Colors.black,
+                canvasColor: secondaryColorD,
+                colorScheme: ColorScheme.dark().copyWith(primary: Colors.yellow),
+                textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme).apply(bodyColor: Colors.black, displayColor: bgColorD),
+              )
+            : AppTheme.dark(config.accentColor).copyWith(
+                scaffoldBackgroundColor: bgColorD,
+                textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme).apply(bodyColor: Colors.white, displayColor: Colors.white),
+                canvasColor: secondaryColorD,
+                colorScheme: ColorScheme.dark().copyWith(primary: Colors.yellow));
+
+        customTheme = config.darkThemeEnabled
+            ? darkTheme
+            : AppTheme.white(config.accentColor).copyWith(
+                scaffoldBackgroundColor: bgColor,
+                canvasColor: secondaryColor,
+                textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme).apply(bodyColor: Colors.black, displayColor: bgColorD),
+              );
+        List<Locale> supportedLocales = [];
         supportedLanguages.forEach((element) => supportedLocales.add(Locale(element.languageCode, '')));
         return OverlaySupport.global(
           child: MaterialApp(
@@ -164,10 +191,8 @@ class _MyAppState extends State<MyApp> {
               }
               return supportedLocales.first;
             },
-            theme: ThemeData(
-              scaffoldBackgroundColor: const Color.fromARGB(255, 37, 37, 37),
-              primarySwatch: Colors.blue,
-            ),
+            theme: config.systemThemeEnabled ? AppTheme.white(config.accentColor) : customTheme,
+            darkTheme: config.systemThemeEnabled ? darkTheme : customTheme,
             builder: EasyLoading.init(
               builder: (context, child) {
                 SizeConfig().init(context);
